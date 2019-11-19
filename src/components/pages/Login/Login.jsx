@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import { AppBar, Tabs, Tab, TextField, Button } from '@material-ui/core';
 import SignIn from '../../partials/signIn';
 import SignUp from '../../partials/signUp';
+import NotFoundPage from '../NotFoundPage';
 
 function a11yProps(index) {
     return {
@@ -24,6 +25,8 @@ export default (props) => {
         alert('hola');
     }
 
+
+    if(props.location.pathname!=='/signin' || props.location.pathname!=='/signup')return <NotFoundPage/>
     return (
         <div className={classes.root}>
             <AppBar position="static">
