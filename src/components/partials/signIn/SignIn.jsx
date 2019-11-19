@@ -1,11 +1,12 @@
 import React from 'react';
 import { useState, useRef } from 'react';
+import { withRouter } from 'react-router-dom';
 import useStyles from './style.js';
 import { Box, TextField, Button, Snackbar } from '@material-ui/core';
 import { setToken } from '../../../utils/token';
 import axios from 'axios';
 
-export default (props) => {
+export default withRouter((props) => {
     // State
     const [messageIncorrectOpen, setMessageIncorrectOpen] = useState(false);
 
@@ -28,6 +29,7 @@ export default (props) => {
             .then((res) => {
                 if (res.status === 200) {
                     setToken(res.data.token);
+                    props.history.push('/');
                 }
             })
             .catch(err => {
@@ -76,4 +78,4 @@ export default (props) => {
             />
         </Box>
     )
-}
+})
