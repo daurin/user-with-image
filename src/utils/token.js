@@ -1,15 +1,18 @@
 import axios from 'axios';
 
-export const verifyTokenls=async(token=getTokenls())=>{
+export const verifyToken=async(token=getToken())=>{
     if(token){
         return axios.get(process.env.REACT_APP_API_URL+'/users/tokens/verify',{
-            headers:{Authorization:`Basic ${token}`}
+            headers:{Authorization:`Bearer ${token}`}
         })
         .then(res=>{
             if(res.status===200)return Promise.resolve();
             else return Promise.reject();  
         })
-        .catch(err=>Promise.reject(err));
+        .catch(err=>{
+            console.log(err);
+            Promise.reject(err);
+        });
     }
     else{
         clearTokenls();
@@ -17,11 +20,11 @@ export const verifyTokenls=async(token=getTokenls())=>{
     }
 }
 
-export const setTokenls=(token)=>{
+export const setToken=(token)=>{
     localStorage.setItem('token',token);
 }
 
-export const getTokenls=()=>{
+export const getToken=()=>{
     const token = localStorage.getItem('token');
     return token||'';
 }

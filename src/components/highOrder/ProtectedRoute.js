@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import {verifyTokenls,getTokenls} from '../../utils/token';
+import {verifyToken,getToken} from '../../utils/token';
 
 export default (props) => {
     // State
@@ -12,18 +12,19 @@ export default (props) => {
     let { component: Component, ...rest } = props;
 
     // Redux
-    const token=getTokenls();
+    const token=getToken();
 
     useEffect(() => {
         let isMount = true;
 
         if (isMount) {
             if (token.length>0 && !auth) {
-                verifyTokenls(token)
+                verifyToken(token)
                     .then(() => {
                         setAuth(true);
                     })
                     .catch(err => {
+                        console.log(err);
                         setAuth(false);
                     })
                     .finally(()=>{
@@ -40,7 +41,7 @@ export default (props) => {
     },[]);
 
     
-    if (loading) return 'Cargando';
+    if (loading) return '';
     else return (
         <Route {...rest} render={
             (props) => {

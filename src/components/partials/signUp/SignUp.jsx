@@ -1,10 +1,11 @@
 import React from 'react';
 import { useState,useRef } from 'react';
+import { withRouter } from 'react-router-dom';
 import useStyles from './style.js';
 import { Box, TextField, Button,Typography } from '@material-ui/core';
 import axios from 'axios';
 
-export default (props) => {
+export default withRouter((props) => {
     // Ref
     const nameRef=useRef(null);
     const lastNameRef=useRef(null);
@@ -29,8 +30,7 @@ export default (props) => {
             }
         })
             .then((res)=>{
-                console.log(res);
-                if(res.status===201)props.history.push('/signin');
+                if(res.status===201)props.history.push('/login/signin');
             })
             .catch(err=>{
                 console.log(err);
@@ -74,15 +74,17 @@ export default (props) => {
                 </label>
                 <input
                     className={classes.formItem}
+                    required
                     accept="image/*"
                     alt='asdsa'
                     id="raised-button-file"
                     type="file"
                 />
                 <Button 
+                    variant='contained'
                     className={classes.formItem}
                     type='submit' >Registrarse</Button>
             </form>
         </Box>
     )
-}
+})
