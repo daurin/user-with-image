@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState,useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import useStyles from './style.js';
 import { Box, TextField, Button,Typography } from '@material-ui/core';
 import axios from 'axios';
+
 
 export default withRouter((props) => {
     // Ref
@@ -30,7 +31,7 @@ export default withRouter((props) => {
             }
         })
             .then((res)=>{
-                if(res.status===201)props.history.push('/login/signin');
+                if(res.status===201)props.history.push('/signin');
             })
             .catch(err=>{
                 console.log(err);
@@ -68,18 +69,14 @@ export default withRouter((props) => {
                     label='Edad'
                     type='number'
                     inputRef={ageRef}/>
-
-                <label htmlFor="raised-button-file">
-                    <Typography variant='subtitle1'>Foto de perfil</Typography>
-                </label>
-                <input
+                {/* <input
                     className={classes.formItem}
                     required
                     accept="image/*"
                     alt='asdsa'
                     id="raised-button-file"
                     type="file"
-                />
+                /> */}
                 <Button 
                     variant='contained'
                     className={classes.formItem}

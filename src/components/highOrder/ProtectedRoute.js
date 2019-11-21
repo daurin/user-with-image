@@ -46,7 +46,7 @@ export default (props) => {
         <Route {...rest} render={
             (props) => {
                 if (auth) return <Component {...props} />
-                else return <Redirect push to='/login/signin' />
+                else return <Redirect push to='/signin' />
             }
         } />
     );

@@ -35,20 +35,20 @@ export default (props) => {
 
     const classes = useStyles();
 
-    if (props.location.pathname !== '/login/signin' && props.location.pathname !== '/login/signup') return <NotFoundPage />
+    //if (props.location.pathname !== '/signin' && props.location.pathname !== '/login/signup') return <NotFoundPage />
     return (
         <div className={classes.root}>
             <AppBar position="static">
                 <Tabs value={props.location.pathname} centered onChange={(e, newValue) => {
                     props.history.push(newValue);
                 }}>
-                    <Tab value={'/login/signin'} label="Iniciar session" {...a11yProps(0)} />
-                    <Tab value={'/login/signup'} label="Registrarse" {...a11yProps(1)} />
+                    <Tab value={'/signin'} label="Iniciar session" {...a11yProps(0)} />
+                    <Tab value={'/signup'} label="Registrarse" {...a11yProps(1)} />
                 </Tabs>
             </AppBar>
             <Switch>
-                <Route path="/login/signin" component={SignIn} />
-                <Route path="/login/signup" component={SignUp} />
+                <Route exact path="/signin" component={SignIn} />
+                <Route exact path="/signup" component={SignUp} />
             </Switch>
         </div>
     )

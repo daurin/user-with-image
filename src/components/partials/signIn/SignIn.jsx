@@ -36,6 +36,7 @@ export default withRouter((props) => {
                 if (err.response) {
                     if (err.response.status === 401) {
                         setMessageIncorrectOpen(true);
+                        passwordRef.current.value='';
                     }
                 }
             })
@@ -50,7 +51,6 @@ export default withRouter((props) => {
                     inputRef={emailRef}
                     required
                     autoComplete='email'
-                    type='email'
                     label='Correo' />
                 <TextField
                     className={classes.formItem}

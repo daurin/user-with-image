@@ -15,7 +15,7 @@ export const verifyToken=async(token=getToken())=>{
         });
     }
     else{
-        clearTokenls();
+        clearToken();
         return Promise.reject();
     }
 }
@@ -29,6 +29,6 @@ export const getToken=()=>{
     return token||'';
 }
 
-export const clearTokenls=()=>{
+export const clearToken=()=>{
     localStorage.removeItem('token');
 }
