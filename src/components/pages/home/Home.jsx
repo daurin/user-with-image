@@ -37,7 +37,7 @@ export default (props) => {
             .then((res) => {
                 if (res.status === 200) {
                     res.data.picture = res.data.picture === null ? userPictureDefault :
-                        process.env.REACT_APP_API_URL + '/files/' + res.data.picture;
+                        env.API_URL + '/files/' + res.data.picture;
                     setUser(res.data);
                 }
             })
@@ -55,7 +55,7 @@ export default (props) => {
             const formData = new FormData();
             formData.append("picture", files[0]);
 
-            axios.put(`${process.env.REACT_APP_API_URL}${'/users/uploads/porfile'}`, formData, {
+            axios.put(`${env.API_URL}${'/users/uploads/porfile'}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${getToken()}`
