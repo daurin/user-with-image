@@ -5,6 +5,7 @@ import useStyles from './style.js';
 import { Box, TextField, Button, Snackbar } from '@material-ui/core';
 import { setToken } from '../../../utils/token';
 import axios from 'axios';
+import env from '../../../env';
 
 export default withRouter((props) => {
     // State
@@ -20,7 +21,7 @@ export default withRouter((props) => {
         e.preventDefault();
 
 
-        axios.post(process.env.REACT_APP_API_URL + '/users/tokens', {}, {
+        axios.post(env.API_URL + '/users/tokens', {}, {
             auth: {
                 username: emailRef.current.value,
                 password: passwordRef.current.value

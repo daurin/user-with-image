@@ -5,6 +5,7 @@ import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import { getToken, clearToken } from '../../../utils/token';
 import userPictureDefault from '../../../assets/user.png';
+import env from '../../../env';
 
 export default (props) => {
     // State
@@ -28,7 +29,7 @@ export default (props) => {
             decoded = {};
         }
 
-        axios.get(process.env.REACT_APP_API_URL + '/users/' + decoded.id, {
+        axios.get(env.API_URL + '/users/' + decoded.id, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

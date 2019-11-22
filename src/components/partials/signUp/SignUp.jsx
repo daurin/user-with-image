@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import useStyles from './style.js';
 import { Box, TextField, Button,Typography } from '@material-ui/core';
 import axios from 'axios';
+import env from '../../../env';
 
 
 export default withRouter((props) => {
@@ -19,7 +20,7 @@ export default withRouter((props) => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        axios.post(process.env.REACT_APP_API_URL+'/users',{
+        axios.post(env.API_URL+'/users',{
             name:nameRef.current.value,
             last_name:lastNameRef.current.value,
             email:emailRef.current.value,

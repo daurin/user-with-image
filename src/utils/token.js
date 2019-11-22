@@ -1,8 +1,9 @@
 import axios from 'axios';
+import env from '../env';
 
 export const verifyToken=async(token=getToken())=>{
     if(token){
-        return axios.get(process.env.REACT_APP_API_URL+'/users/tokens/verify',{
+        return axios.get(env.API_URL+'/users/tokens/verify',{
             headers:{Authorization:`Bearer ${token}`}
         })
         .then(res=>{
