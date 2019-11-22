@@ -22,14 +22,16 @@ export default (props) => {
                 verifyToken(token)
                     .then(() => {
                         setAuth(true);
+                        setLoading(false);
                     })
                     .catch(err => {
                         console.log(err);
                         setAuth(false);
-                    })
-                    .finally(()=>{
                         setLoading(false);
-                    });
+                    })
+                    // .finally(()=>{
+                        
+                    // });
             }
             else{
                 setAuth(false);
