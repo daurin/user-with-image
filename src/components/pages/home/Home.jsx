@@ -92,7 +92,11 @@ export default (props) => {
                 onChange={onChangeImg}
             />
             <label style={{ maxWidth: '300px' }} htmlFor="raised-button-file">
-                <img width='300px' alt='foto de perfil' src={user.picture}></img>
+                <img 
+                    width='300px' 
+                    alt='foto de perfil' 
+                    src={user.picture}
+                    onError={(e)=>{e.target.onerror = null; e.target.src=userPictureDefault}}/>
             </label>
             <Button variant='contained'
                 onClick={(e) => {

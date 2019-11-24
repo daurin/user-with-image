@@ -9,7 +9,7 @@ import env from '../../../env';
 
 export default withRouter((props) => {
     // State
-    const [messageIncorrectOpen, setMessageIncorrectOpen] = useState(false);
+    const [snackMessage, setSnackMessage] = useState('');
 
     // Ref
     const emailRef = useRef(null);
@@ -36,11 +36,21 @@ export default withRouter((props) => {
             .catch(err => {
                 if (err.response) {
                     if (err.response.status === 401) {
-                        setMessageIncorrectOpen(true);
+                        setSnackMessage('Correo o contraseña incorrecta');
                         passwordRef.current.value='';
                     }
                 }
             })
+    }
+
+    const resetPassword=(e)=>{
+        axios.post(`${env.API_URL}/users/password/${emailRef.current.value}`)
+            .then((res)=>{
+                if(res.status===204)setSnackMessage('Se envio a su correo las intrucciones para cambiar la contraseña');
+            })
+            .catch((err)=>{
+
+            });
     }
 
     return (
@@ -64,7 +74,10 @@ export default withRouter((props) => {
                     variant='contained'
                     type='submit'
                 >Iniciar session</Button>
-                <Button className={classes.formItem}>Olvide la contraseña</Button>
+                <Button 
+                    className={classes.formItem}
+                    onClick={resetPassword}
+                    >Olvide la contraseña</Button>
             </form>
 
             <Snackbar
@@ -72,10 +85,10 @@ export default withRouter((props) => {
                     vertical: 'bottom',
                     horizontal: 'center',
                 }}
-                open={messageIncorrectOpen}
+                open={snackMessage.length>0}
                 autoHideDuration={6000}
-                onClose={(e) => setMessageIncorrectOpen(false)}
-                message={<span id="message-id">Correo o contraseña incorrecta</span>}
+                onClose={(e) => setSnackMessage('')}
+                message={<span id="message-id">{snackMessage}</span>}
             />
         </Box>
     )

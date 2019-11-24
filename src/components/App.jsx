@@ -5,6 +5,7 @@ import Login from './pages/login';
 import ProtectedRoute from './highOrder/ProtectedRoute';
 import Home from './pages/home';
 import NotFoundPage from './pages/NotFoundPage';
+import ResetPassword from './pages/resetPassword';
 
 export default (props) => {
 
@@ -13,6 +14,7 @@ export default (props) => {
         <Switch>
           <Route exact path={['/signin','/signup']} component={Login} />
           <ProtectedRoute exact path='/' component={Home} />
+          <Route exact path='/password/reset/:idUser/:token' component={ResetPassword} />
           <Route component={NotFoundPage} />
         </Switch>
       </BrowserRouter>
